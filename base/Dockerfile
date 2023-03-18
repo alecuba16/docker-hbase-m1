@@ -1,13 +1,13 @@
-FROM openjdk:8
-MAINTAINER Ivan Ermilov <ivan.s.ermilov@gmail.com>
+FROM openjdk:8-alpine3.8
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends net-tools curl netcat
+RUN apk update && apk add net-tools curl netcat-openbsd
 
-ENV HBASE_VERSION 1.2.6
-ENV HBASE_URL http://www.apache.org/dist/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz
+ENV HBASE_VERSION 1.4.13
+ENV HBASE_URL http://archive.apache.org/dist/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz
 RUN set -x \
     && curl -fSL "$HBASE_URL" -o /tmp/hbase.tar.gz \
     && curl -fSL "$HBASE_URL.asc" -o /tmp/hbase.tar.gz.asc \
+    && mkdir -p /opt \
     && tar -xvf /tmp/hbase.tar.gz -C /opt/ \
     && rm /tmp/hbase.tar.gz*
 
