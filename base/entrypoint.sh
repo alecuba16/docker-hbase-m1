@@ -29,6 +29,7 @@ function configure() {
 }
 
 configure /etc/hbase/hbase-site.xml hbase HBASE_CONF
+chmod 777 /etc/hbase/hbase-site.xml
 
 function wait_for_it()
 {

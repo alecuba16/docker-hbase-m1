@@ -1,6 +1,6 @@
-FROM openjdk:8-alpine3.8
+FROM openjdk:8-alpine
 
-RUN apk update && apk add net-tools curl netcat-openbsd
+RUN apk update && apk add net-tools curl netcat-openbsd bash perl
 
 ENV HBASE_VERSION 1.4.13
 ENV HBASE_URL http://archive.apache.org/dist/hbase/$HBASE_VERSION/hbase-$HBASE_VERSION-bin.tar.gz
@@ -15,6 +15,8 @@ RUN ln -s /opt/hbase-$HBASE_VERSION/conf /etc/hbase
 RUN mkdir /opt/hbase-$HBASE_VERSION/logs
 
 RUN mkdir /hadoop-data
+
+#RUN curl -Ls https://github.com/owlab-exp/docker-hadoop-arm64/raw/master/hadoop-native-64-2.7.1.tar | tar -x -C /usr/lib
 
 ENV HBASE_PREFIX=/opt/hbase-$HBASE_VERSION
 ENV HBASE_CONF_DIR=/etc/hbase
